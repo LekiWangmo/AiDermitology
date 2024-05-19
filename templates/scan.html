@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/about.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap">
+    <style>
+        .camera-card {
+            position: relative;
+            width: fit-content;
+            margin: auto;
+        }
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        #dismiss {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            display: none;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+        #upload, #predict {
+            background-color: #008CBA;
+        }
+        #upload:hover, #predict:hover {
+            background-color: #007bb5;
+        }
+    </style>
+</head>
+<body>
+    <section id="b">
+        <div id="large-header" class="large-header">
+            <header>
+                <a href="#" class="logo" onclick="location.href='/index'">
+                    <img src="/static/images/logo.png" alt="Logo">
+                </a>
+            </header>
+
+            <canvas id="demo-canvas"></canvas>
+            <div class="content">
+                <h1 class="main-title">Capture Your <span class="thin">Face</span></h1>
+                <p class="collection">
+                    Experience effortless skincare analysis with AI Dermatology.<br> 
+                    Upload a photo or click with your device's camera for instant skin assessment and<br>
+                    personalized recommendations. Clearer skin is just a click away!
+                </p>
+                <div class="camera-card">
+                    <div class="camera">
+                        <video id="video" autoplay></video>
+                        <canvas id="canvas"></canvas>
+                        <button id="dismiss">X</button>
+                        <div class="button-container">
+                            <button id="snap">Capture</button>
+                            <button id="upload">Upload</button>
+                            <button id="predict">Done</button>
+                            <input type="file" id="fileInput" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+                <main>       
+                    <ol class="links">
+                        <li><a href="#" class="active" onclick="location.href='/index'">Home</a></li>
+                        <li><a href="#" onclick="location.href='/index'">About</a></li>
+                        <li><a href="#" onclick="location.href='/scan'">Scan</a></li>
+                        <li><a href="#" onclick="location.href='/product'">Recommendation</a></li>
+                    </ol>
+                </main>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="/static/js/script.js"></script>
+    <script>
+        // Get access to the camera
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                var video = document.getElementById('video');
+                video.srcObject = stream;
+                video.play();
+            }).catch(function(error) {
+                console.error("Error accessing the camera: ", error);
+            });
+        } else {
+            alert("getUserMedia is not supported by your browser");
+        }
+
+        // Elements for taking the snapshot
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var video = document.getElementById('video');
+        var snapButton = document.getElementById('snap');
+        var uploadButton = document.getElementById('upload');
+        var fileInput = document.getElementById('fileInput');
+        var dismissButton = document.getElementById('dismiss');
+        var predictButton = document.getElementById('predict');
+
+        // Trigger photo take
+        snapButton.addEventListener('click', function() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            canvas.style.display = 'block';
+            snapButton.disabled = true;
+            uploadButton.disabled = false;
+            dismissButton.style.display = 'block';
+        });
+
+        // Open file dialog when upload button is clicked
+        uploadButton.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        // Handle file selection and upload
+        fileInput.addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var img = new Image();
+                    img.onload = function() {
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        context.clearRect(0, 0, canvas.width, canvas.height);
+                        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        canvas.style.display = 'block';
+                        dismissButton.style.display = 'block';
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+                fileInput.value = ""; // Reset file input value
+            }
+        });
+
+        // Handle dismiss button
+        dismissButton.addEventListener('click', function() {
+            canvas.style.display = 'none';
+            snapButton.disabled = false;
+            uploadButton.disabled = false; // Ensure upload button is enabled
+            dismissButton.style.display = 'none';
+            context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+        });
+
+        // Handle predict button
+        predictButton.addEventListener('click', function() {
+            var dataUrl = canvas.toDataURL('image/png');
+            fetch('/classify_camera', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'image_data=' + encodeURIComponent(dataUrl)
+            }).then(response => response.text())
+                .then(html => {
+                    // Handle the response appropriately here, for now just log it
+                    console.log(html);
+                }).catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>

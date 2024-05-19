@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+header {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2% 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header a.logo {
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    font-size: 28px;
+    color: white;
+}
+
+header a.logo img {
+    width: 70px;
+    margin-right: 10px;
+}
+
+header .search-box {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 50px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+main {
+    position: relative;
+    height: auto;
+}
+
+main ol.links {
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    z-index: 2;
+    color: white;
+    list-style-type: none;
+    transform: translateY(-50%);
+}
+
+main ol.links a {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: white;
+    text-transform: capitalize;
+    font-weight: 500;
+    margin: 30px 0;
+    text-align: right;
+    opacity: 0.5;
+    transition: all 0.5s ease-in;
+}
+
+main ol.links a::after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    width: 10px;
+    height: 1px;
+    background-color: white;
+    transition: all 0.5s ease-in;
+}
+
+main ol.links a.active, main ol.links a:hover {
+    opacity: 1;
+    transition: all 0.5s ease-in;
+}
+
+main ol.links a.active::after, main ol.links a:hover::after {
+    right: -40px;
+    width: 30px;
+    transition: all 0.5s ease-in;
+}
+
+.large-header {
+    position: relative;
+    width: 100%;
+    background: #01070c;
+    background: radial-gradient(circle, #052039, rgb(2, 16, 36) 60%);
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    z-index: 1;
+}
+#large-header {
+    background-image: url('../images/hand.jpg');
+}
+
+.main-title {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 0;
+    padding-left: 60px;
+    padding-bottom: 430px;
+    color: #adbdbd;
+    text-align: center;
+    font-size: 2.4em;
+}
+#demo-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure canvas is behind other content */
+}
+
+.content {
+    position: relative; /* Ensure child elements are positioned relative to this */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding-left: 60px;
+    color: #f9f1e9; 
+    font-size: 2.2vh;
+}
+
+.collection {
+    padding-top: 180px;
+}
+
+.demo-1 .main-title {
+    text-transform: uppercase;
+    font-size: 3.4em;
+    letter-spacing: 0.1em;
+}
+.main-title .thin {
+    font-weight: 150;
+}
+.demo-1 .collection {
+    text-transform: uppercase;
+    font-size: 2.2em;
+    letter-spacing: 0.1em;
+    padding-bottom: 100px;
+}
+@media only screen and (max-width: 768px) {
+    .demo-1 .main-title {
+        font-size: 3em;
+    }
+}
+
+.camera-card {
+    background: rgba(176, 178, 203, 0.104);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    width: fit-content;
+}
+
+.camera {
+    position: relative;
+    width: 320px;
+    text-align: center;
+}
+
+video, canvas {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#canvas {
+    display: none;
+}
+
+.button-container {
+    padding: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+}
+
+button:disabled {
+    background-color: #cccccc;
+}
+
+#upload_btn {
+    background-color: #008080;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+/* 
+.os-link {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    color: white;
+    text-decoration: none;
+    padding-bottom: 100px;
+    font-size: 20px;
+} */
+
+/* .os-link:hover {
+    text-decoration: underline;
+} */
+.links{
+  padding-bottom: 600px;
+}

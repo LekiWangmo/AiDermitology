@@ -74,15 +74,19 @@
                         <div class="button-container">
                             <button id="snap">Capture</button>
                             <button id="upload">Upload</button>
-                            <button id="predict">Done</button>
+                            <button id="predict">Predict</button>
                             <input type="file" id="fileInput" style="display: none;">
                         </div>
                     </div>
                 </div>
-                <main>       
+                <main>  
+                    <div class="hamburger-menu">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>     
                     <ol class="links">
                         <li><a href="#" class="active" onclick="location.href='/index'">Home</a></li>
-                        <li><a href="#" onclick="location.href='/index'">About</a></li>
                         <li><a href="#" onclick="location.href='/scan'">Scan</a></li>
                         <li><a href="#" onclick="location.href='/product'">Recommendation</a></li>
                     </ol>
@@ -166,19 +170,52 @@
         // Handle predict button
         predictButton.addEventListener('click', function() {
             var dataUrl = canvas.toDataURL('image/png');
-            fetch('/classify_camera', {
+            var formData = new FormData();
+            formData.append('file', dataURLtoBlob(dataUrl), 'image.png');
+
+            fetch('/classify', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: 'image_data=' + encodeURIComponent(dataUrl)
+                body: formData
             }).then(response => response.text())
                 .then(html => {
-                    // Handle the response appropriately here, for now just log it
-                    console.log(html);
+                    document.open();
+                    document.write(html);
+                    document.close();
                 }).catch(error => {
                     console.error('Error:', error);
                 });
+        });
+
+        function dataURLtoBlob(dataurl) {
+            var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            while(n--){
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], {type:mime});
+        }
+
+        // Get access to the camera (optional for capture functionality)
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                video.srcObject = stream;
+                video.play();
+            }).catch(function(error) {
+                console.error("Error accessing the camera: ", error);
+            });
+        } else {
+            alert("getUserMedia is not supported by your browser");
+        }
+
+        // Trigger photo take
+        snapButton.addEventListener('click', function() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            canvas.style.display = 'block';
+            snapButton.disabled = true;
+            uploadButton.disabled = false;
+            dismissButton.style.display = 'block';
         });
     </script>
 </body>

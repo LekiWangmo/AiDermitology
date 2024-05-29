@@ -25,17 +25,6 @@ header a.logo img {
     margin-right: 10px;
 }
 
-header .search-box {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    background-color: white;
-    overflow: hidden;
-    border-radius: 50px;
-    padding: 10px;
-    cursor: pointer;
-}
-
 main {
     position: relative;
     height: auto;
@@ -75,12 +64,14 @@ main ol.links a::after {
     transition: all 0.5s ease-in;
 }
 
-main ol.links a.active, main ol.links a:hover {
+main ol.links a.active,
+main ol.links a:hover {
     opacity: 1;
     transition: all 0.5s ease-in;
 }
 
-main ol.links a.active::after, main ol.links a:hover::after {
+main ol.links a.active::after,
+main ol.links a:hover::after {
     right: -40px;
     width: 30px;
     transition: all 0.5s ease-in;
@@ -96,23 +87,24 @@ main ol.links a.active::after, main ol.links a:hover::after {
     background-position: center center;
     z-index: 1;
 }
+
 #large-header {
     background-image: url('../images/hand.jpg');
 }
 
 .main-title {
     position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    margin: 0;
-    padding: 0;
-    padding-left: 60px;
-    padding-bottom: 430px;
+    left: 57%;
+    transform: translateX(-50%) translateY(-50%);
+    top: 15vh; /* Start from 15% of the viewport height, adjust this value as needed */
     color: #adbdbd;
     text-align: center;
     font-size: 2.4em;
+    padding-left: 55px; /* Ensure this padding does not cause issues */
+    padding-bottom: 0; /* Remove excess padding that might push it too far down */
 }
+
+
 #demo-canvas {
     position: absolute;
     top: 0;
@@ -134,40 +126,190 @@ main ol.links a.active::after, main ol.links a:hover::after {
 }
 
 .collection {
-    padding-top: 180px;
+    padding-top: 135px;
 }
 
-.demo-1 .main-title {
+.ddemo-canvas .main-title {
     text-transform: uppercase;
     font-size: 3.4em;
     letter-spacing: 0.1em;
 }
+
 .main-title .thin {
     font-weight: 150;
 }
-.demo-1 .collection {
+
+.demo-canvas .collection {
     text-transform: uppercase;
     font-size: 2.2em;
     letter-spacing: 0.1em;
     padding-bottom: 100px;
 }
+
+
+
+.hamburger-menu {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 25px;
+    width: 30px;
+  }
+  
+  .bar {
+    height: 50px;
+    width: 100%;
+    background-color: #01070c;
+    border-radius: 10px;
+  }
+  
+  .links {
+    display: none;
+  }
+  
+  .navigation.active {
+    display: block;
+  }
+  
+  @media (min-width: 768px) {
+    .hamburger-menu {
+        display: none;
+    }
+  
+    .links {
+        display: block;
+    }
+  
+    .navigation {
+        display: flex;
+    }
+  
+    .navigation li {
+        margin-right: 100px;
+    }
+  }
+  
+@media only screen and (max-width: 1200px) {
+    header {
+        padding: 2% 3%;
+    }
+
+    header a.logo {
+        font-size: 24px;
+    }
+
+    header a.logo img {
+        width: 60px;
+    }
+
+    .main-title {
+        font-size: 2em;
+    }
+
+    .collection {
+        font-size: 1.8em;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    main ol.links {
+        right: 5%;
+    }
+
+    main ol.links a {
+        font-size: 1em;
+        margin: 20px 0;
+    }
+
+    .main-title {
+        font-size: 1.8em;
+        /* padding-top -30px; */
+    }
+
+    .collection {
+        font-size: 1.6em;
+    }
+}
+
 @media only screen and (max-width: 768px) {
-    .demo-1 .main-title {
-        font-size: 3em;
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2% 3%;
+    }
+
+    header a.logo {
+        font-size: 22px;
+    }
+
+    header a.logo img {
+        width: 50px;
+    }
+
+    main ol.links {
+        right: 2%;
+    }
+
+    main ol.links a {
+        font-size: 0.9em;
+        margin: 15px 0;
+    }
+
+    .main-title {
+        font-size: 1.6em;
+        padding-left: 20px;
+    }
+
+    .collection {
+        font-size: 1.4em;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    header {
+        padding: 2% 2%;
+    }
+
+    header a.logo {
+        font-size: 20px;
+    }
+
+    header a.logo img {
+        width: 40px;
+    }
+
+    main ol.links {
+        right: 1%;
+    }
+
+    main ol.links a {
+        font-size: 0.8em;
+        margin: 10px 0;
+    }
+
+    .main-title {
+        font-size: 1.4em;
+        padding-left: 10px;
+
+    }
+
+    .collection {
+        font-size: 1.2em;
     }
 }
 
 .camera-card {
     background: rgba(176, 178, 203, 0.104);
     border-radius: 10px;
-    padding: 20px;
+    padding: 30px;
     margin-top: 20px;
     width: fit-content;
 }
 
 .camera {
     position: relative;
-    width: 320px;
+    width: 700px;
     text-align: center;
 }
 
@@ -208,20 +350,23 @@ button:disabled {
     border: none;
     border-radius: 5px;
 }
-/* 
-.os-link {
-    position: absolute;
-    top: 10%;
-    left: 5%;
-    color: white;
-    text-decoration: none;
-    padding-bottom: 100px;
-    font-size: 20px;
-} */
 
-/* .os-link:hover {
-    text-decoration: underline;
-} */
-.links{
-  padding-bottom: 600px;
+.links {
+    padding-bottom: 600px;
+}
+
+@media only screen and (max-width: 768px) {
+    .camera {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .camera-card {
+        padding: 20px;
+    }
+
+    button {
+        font-size: 14px;
+    }
 }

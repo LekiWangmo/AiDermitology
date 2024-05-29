@@ -53,9 +53,7 @@
         .submit-btn:hover {
             background-color: #45a049;
         }
-        .recommendation-item {
-            margin-bottom: 20px;
-        }
+
         .recommendation-item {
             margin-bottom: 20px;
             padding: 15px;
@@ -80,6 +78,7 @@
             text-align: center;
             line-height: 25px;
         }
+
         .card img {
             width: 100%; /* Ensure the image takes the full width of the card */
             height: auto; /* Maintain the aspect ratio */
@@ -88,7 +87,7 @@
             object-fit: cover; /* Ensures the image is scaled and cropped to fit the specified size */
             display: block;
             margin: 0 auto; /* Center the image horizontally */
-}
+        }
 
     </style>
 </head>
@@ -108,123 +107,87 @@
                         <h3>Quiz</h3>
                         <div class="card">
                             <p>1. Do you have normal skin? </p>
-                            <input type="radio" name="q1" value="Yes"> Yes <br>
-                            <input type="radio" name="q1" value="No"> No
+                            <input type="radio" id="q1-yes" name="q1" value="Yes"> Yes <br>
+                            <input type="radio" id="q1-no" name="q1" value="No"> No
                         </div>
                 
                         <!-- Add more questions here -->
                         <div class="card">
                             <p>2. Do you have dry skin? </p>
-                            <input type="radio" name="q2" value="Yes"> Yes <br>
-                            <input type="radio" name="q2" value="No"> No
+                            <input type="radio" id="q2-yes" name="q2" value="Yes"> Yes <br>
+                            <input type="radio" id="q2-no" name="q2" value="No"> No
                         </div>
                 
                         <div class="card">
                             <p>3. Do you have oily skin? </p>
-                            <input type="radio" name="q3" value="Yes"> Yes <br>
-                            <input type="radio" name="q3" value="No"> No
+                            <input type="radio" id="q3-yes" name="q3" value="Yes"> Yes <br>
+                            <input type="radio" id="q3-no" name="q3" value="No"> No
                         </div>
                         
                         <!-- Continue adding questions -->
                         <div class="card">
                             <p>4. Do you have combination skin? </p>
-                            <input type="radio" name="q4" value="Yes"> Yes <br>
-                            <input type="radio" name="q4" value="No"> No
+                            <input type="radio" id="q4-yes" name="q4" value="Yes"> Yes <br>
+                            <input type="radio" id="q4-no" name="q4" value="No"> No
                         </div>
                         
                         <div class="card">
                             <p>5. Do you have acne-prone skin? </p>
-                            <input type="radio" name="q5" value="Yes"> Yes <br>
-                            <input type="radio" name="q5" value="No"> No
+                            <input type="radio" id="q5-yes" name="q5" value="Yes"> Yes <br>
+                            <input type="radio" id="q5-no" name="q5" value="No"> No
                         </div>
                         
                         <div class="card">
-                            <p>6. Do you have sensitive skin? </p>
-                            <input type="radio" name="q6" value="Yes"> Yes <br>
-                            <input type="radio" name="q6" value="No"> No
+                            <p>6. Do you have wrinkles? </p>
+                            <input type="radio" id="q6-yes" name="q6" value="Yes"> Yes <br>
+                            <input type="radio" id="q6-no" name="q6" value="No"> No
                         </div>
                         
                         <div class="card">
-                            <p>7. Do you have fine lines? </p>
-                            <input type="radio" name="q7" value="Yes"> Yes <br>
-                            <input type="radio" name="q7" value="No"> No
+                            <p>7. Do you have dull skin? </p>
+                            <input type="radio" id="q7-yes" name="q7" value="Yes"> Yes <br>
+                            <input type="radio" id="q7-no" name="q7" value="No"> No
                         </div>
                         
                         <div class="card">
-                            <p>8. Do you have wrinkles? </p>
-                            <input type="radio" name="q8" value="Yes"> Yes <br>
-                            <input type="radio" name="q8" value="No"> No
+                            <p>8. Do you have enlarged pores? </p>
+                            <input type="radio" id="q8-yes" name="q8" value="Yes"> Yes <br>
+                            <input type="radio" id="q8-no" name="q8" value="No"> No
                         </div>
                         
                         <div class="card">
-                            <p>9. Do you experience redness? </p>
-                            <input type="radio" name="q9" value="Yes"> Yes <br>
-                            <input type="radio" name="q9" value="No"> No
+                            <p>9. Do you have blackheads? </p>
+                            <input type="radio" id="q9-yes" name="q9" value="Yes"> Yes <br>
+                            <input type="radio" id="q9-no" name="q9" value="No"> No
                         </div>
                         
                         <div class="card">
-                            <p>10. Do you have dull skin? </p>
-                            <input type="radio" name="q10" value="Yes"> Yes <br>
-                            <input type="radio" name="q10" value="No"> No
+                            <p>10. Do you have dark circles? </p>
+                            <input type="radio" id="q10-yes" name="q10" value="Yes"> Yes <br>
+                            <input type="radio" id="q10-no" name="q10" value="No"> No
+                        </div>
+                            
+                        <div class="card">
+                            <p>11. Do you have under-eye bags? </p>
+                            <input type="radio" id="q11-yes" name="q11" value="Yes"> Yes <br>
+                            <input type="radio" id="q11-no" name="q11" value="No"> No
                         </div>
                         
                         <div class="card">
-                            <p>11. Do you have enlarged pores? </p>
-                            <input type="radio" name="q11" value="Yes"> Yes <br>
-                            <input type="radio" name="q11" value="No"> No
-                        </div>
-                        
-                        <div class="card">
-                            <p>12. Do you have pigmentation issues? </p>
-                            <input type="radio" name="q12" value="Yes"> Yes <br>
-                            <input type="radio" name="q12" value="No"> No
-                        </div>
-                        
-                        <div class="card">
-                            <p>13. Do you have blackheads? </p>
-                            <input type="radio" name="q13" value="Yes"> Yes <br>
-                            <input type="radio" name="q13" value="No"> No
-                        </div>
-                        
-                        <div class="card">
-                            <p>14. Do you have whiteheads? </p>
-                            <input type="radio" name="q14" value="Yes"> Yes <br>
-                            <input type="radio" name="q14" value="No"> No
-                        </div>
-                        
-                        <div class="card">
-                            <p>15. Do you experience blemishes? </p>
-                            <input type="radio" name="q15" value="Yes"> Yes <br>
-                            <input type="radio" name="q15" value="No"> No
-                        </div>
-                        
-                        <div class="card">
-                            <p>16. Do you have dark circles? </p>
-                            <input type="radio" name="q16" value="Yes"> Yes <br>
-                            <input type="radio" name="q16" value="No"> No
-                        </div>
-                        
-                        <div class="card">
-                            <p>17. Do you have under-eye bags? </p>
-                            <input type="radio" name="q17" value="Yes"> Yes <br>
-                            <input type="radio" name="q17" value="No"> No
-                        </div>
-                        
-                        <div class="card">
-                            <p>18. Do you have dark spots? </p>
-                            <input type="radio" name="q18" value="Yes"> Yes <br>
-                            <input type="radio" name="q18" value="No"> No
-                        </div>
-                      
+                            <p>12. Do you have dark spots? </p>
+                            <input type="radio" id="q12-yes" name="q12" value="Yes"> Yes <br>
+                            <input type="radio" id="q12-no" name="q12" value="No"> No
+                        </div>    
                         <button id="submit-product-btn" type="button" class="submit-btn">Submit</button>
-
+                   
                     </form>
+
                 </div>
 
                 <main>       
                     <ol class="links">
                         <li><a href="#" class="active" onclick="location.href='/index'">Home</a></li>
-                        <li><a href="#" onclick="location.href='/index'">About</a></li>
+
                         <li><a href="#" onclick="location.href='/scan'">Scan</a></li>
                         <li><a href="#" onclick="location.href='/product'">Recommendation</a></li>
                     </ol>
@@ -247,8 +210,9 @@
 
 </body>
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
-        // Initially hide the recommendations section
+
+    document.addEventListener('DOMContentLoaded', function() {
+       
         const recommendationSection = document.getElementById('product-recommendation');
         recommendationSection.style.display = 'none';
 
@@ -258,83 +222,80 @@
         closeBtn.addEventListener('click', function() {
             recommendationSection.style.display = 'none';
             resetQuizForm();
+        });
     });
-
-
-});
-function validateForm() {
+    function validateForm() {
         const radioGroups = document.querySelectorAll('input[type="radio"]:checked');
-        return radioGroups.length === 18; // Assuming there are 18 questions
-}
-
-
-function submitProductQuiz(event) {
-    event.preventDefault(); // Prevent the default form submission behavior
-    const allQuestionsAnswered = validateForm();
-    if (!allQuestionsAnswered) {
-        alert('Please answer all questions before submitting.');
-        return;
+        return radioGroups.length === 12; // Assuming there are 15 questions
     }
-    fetch('/submit_quiz', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(getProductFormData())
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
+
+    function submitProductQuiz(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+        const allQuestionsAnswered = validateForm();
+        if (!allQuestionsAnswered) {
+            alert('Please answer all questions before submitting.');
+            return;
         }
-        return response.json();
-    })
-    .then(data => {
-        if (data.error) {
-            console.error('Error:', data.error);
-        } else {
-            displayProductRecommendations(data);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
+        fetch('http://127.0.0.1:5000/submit_quiz', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(getProductFormData())
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                console.error('Error:', data.error);
+            } else {
+                displayProductRecommendations(data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 
-function getProductFormData() {
-    const form = document.getElementById('quiz-form');
-    const formData = new FormData(form);
-    const jsonData = {};
-    formData.forEach((value, key) => {
-        jsonData[key] = value === 'Yes' ? 1 : 0;
-    });
-    return jsonData;
-}
+    function getProductFormData() {
+        const form = document.getElementById('quiz-form');
+        const formData = new FormData(form);
+        const jsonData = {};
+        formData.forEach((value, key) => {
+            jsonData[key] = value === 'Yes' ? 1 : 0;
+        });
+        return jsonData;
+    }
 
-function displayProductRecommendations(data) {
-    const recommendationsContainer = document.getElementById('recommendations');
-    recommendationsContainer.innerHTML = ''; // Clear previous recommendations
-    data.forEach(item => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.innerHTML = `
-            <h3>${item.brand} - ${item.name}</h3>
-            <p>Price: ${item.price}</p>
-            <p>Skin Type: ${item['skin type']}</p>
-            <p>Concern: ${item.concern}</p>
-            <img src="${item.image_url}" alt="${item.name}" />
-        `;
-        recommendationsContainer.appendChild(card);
-    });
-    document.getElementById('product-recommendation').style.display = 'block'; // Show the recommendations section
-}
-function resetQuizForm() {
-    const form = document.getElementById('quiz-form');
-    const radioInputs = form.querySelectorAll('input[type="radio"]');
-    radioInputs.forEach(input => {
-        input.checked = false;
-    });
-}
+    function displayProductRecommendations(data) {
+        const recommendationsContainer = document.getElementById('recommendations');
+        recommendationsContainer.innerHTML = ''; // Clear previous recommendations
+        data.forEach(item => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+                <h3>${item.brand} - ${item.name}</h3>
+                <p>Price: ${item.price}</p>
+                <p>Skin Type: ${item['skin type']}</p>
+                <p>Concern: ${item.concern}</p>
+                <img src="${item.image_url}" alt="${item.name}" />
+            `;
+            recommendationsContainer.appendChild(card);
+        });
+        document.getElementById('product-recommendation').style.display = 'block'; // Show the recommendations section
+    }
 
+    function resetQuizForm() {
+        const form = document.getElementById('quiz-form');
+        const radioInputs = form.querySelectorAll('input[type="radio"]');
+        radioInputs.forEach(input => {
+            input.checked = false;
+        });
+    }
 </script>
 </html>
 

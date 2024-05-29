@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/about.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap">
+    <style>
+        .camera-card {
+            background: rgba(176, 178, 203, 0.104);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            position: relative;
+            width: fit-content;
+        }
+        .result-container {
+            width: 320px;
+            margin: auto;
+            position: relative;
+            height: 400px; /* Adjust the height as needed */
+            overflow: auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px
+        }
+    </style>
+</head>
+<body>
+    <section id="b">
+        <div id="large-header" class="large-header">
+            <header>
+                <a href="#" class="logo" onclick="location.href='/index'">
+                    <img src="/static/images/logo.png" alt="Logo">
+                </a>
+            </header>
+            <canvas id="demo-canvas"></canvas>
+            <div class="content" >
+                <!-- <h1 class="main-title">Get Your <span class="thin">Result</span></h1 style="padding-left:45%, padding-bottom:20px"> -->
+                <!-- <p class="collection">
+                    Experience effortless skincare analysis with AI Dermatology.<br> 
+                    Upload a photo or click with your device's camera for instant skin assessment and<br>
+                    personalized recommendations. Clearer skin is just a click away!
+                </p> -->
+                <div class="camera-card" style="margin-bottom: 10px; margin: auto; position: relative;  border-radius: 10px;margin-top: 80px;width: 800px; height: fit-content;">
+                    <div class="result-container" style="padding-bottom: 20px; width:700px;   border-radius: 10px;">
+                        <h1>Prediction Result</h1>
+                        <img src="data:image/png;base64,{{ image_data }}" alt="Uploaded Image" style="width:500px;   border-radius: 10px;">
+                        <p>Predicted Class: <strong>{{ predicted_class_svm }}</strong></p>
+                        
+                        {% if predicted_class_svm == 'Acne' %}
+                            <p>Acne is a common skin condition characterized by big pimples, blackheads, and cysts. It occurs when hair follicles become clogged with oil and dead skin cells, often exacerbated by bacteria and inflammation.</p>
+                            <p><b>Taking care of Acne:</b></p>
+                            <p>1. Cleanse Gently</p>
+                            <p>2. Avoid Touching</p>
+                            <p>3. Avoid Heavy Makeup</p>
+                            <p>4. Stay Hydrated</p>
+                            <p>5. Maintain a Balanced Diet</p>
+                        {% elif predicted_class_svm == 'Blackheads' %}
+                            <p>Blackheads are small bumps that appear on your skin due to clogged hair follicles. They are a mild type of acne that usually forms on the face, but they can also appear on the back, chest, neck, arms, and shoulders.</p>
+                            <p><b>Taking care of Blackheads:</b></p>
+                            <p>1. Cleanse with a salicylic acid cleanser</p>
+                            <p>2. Use non-comedogenic products</p>
+                            <p>3. Exfoliate regularly</p>
+                            <p>4. Don't squeeze or pick at blackheads</p>
+                            <p>5. Use pore strips or masks</p>
+                        {% elif predicted_class_svm == 'Eyebags' %}
+                            <p>Eyebags are mild swelling or puffiness under the eyes, often caused by fluid retention, lack of sleep, or aging.</p>
+                            <p><b>Taking care of Eyebags:</b></p>
+                            <p>1. Get adequate sleep</p>
+                            <p>2. Reduce salt intake</p>
+                            <p>3. Use a cool compress</p>
+                            <p>4. Stay hydrated</p>
+                            <p>5. Use an eye cream with caffeine</p>
+                        {% elif predicted_class_svm == 'Pimple' %}
+                            <p>Pimples are a type of acne caused by clogged pores. They often become inflamed and filled with pus.</p>
+                            <p><b>Taking care of Pimples:</b></p>
+                            <p>1. Use an over-the-counter acne treatment</p>
+                            <p>2. Cleanse your skin gently</p>
+                            <p>3. Avoid touching your face</p>
+                            <p>4. Avoid heavy makeup</p>
+                            <p>5. Maintain a healthy diet</p>
+                        {% elif predicted_class_svm == 'Fairskin' %}
+                            <p>Fair skin requires regular care to avoid sun damage and maintain an even complexion.</p>
+                            <p><b>Taking care of Fair Skin:</b></p>
+                            <p>1. Use sunscreen daily</p>
+                            <p>2. Moisturize regularly</p>
+                            <p>3. Avoid excessive sun exposure</p>
+                            <p>4. Use gentle skincare products</p>
+                            <p>5. Stay hydrated</p>
+                        {% endif %}
+                        
+                        <button onclick="window.location.href='/scan'" >Go Back</button>
+                    </div>
+                </div>
+                <main>  
+                    <div class="hamburger-menu">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>     
+                    <ol class="links">
+                        <li><a href="#" class="active" onclick="location.href='/index'">Home</a></li>
+                        <li><a href="#" onclick="location.href='/scan'">Scan</a></li>
+                        <li><a href="#" onclick="location.href='/product'">Recommendation</a></li>
+                    </ol>
+                </main>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

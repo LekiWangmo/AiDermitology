@@ -25,9 +25,13 @@
                     Get start Now!
                 </a>
             </div>
+            <div class="hamburger-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
             <ol class="links">
                 <li><a href="#" class="active" onclick="location.href='/index'">Home</a></li>
-                <li><a href="#" onclick="location.href='/index'">About</a></li>
                 <li><a href="#" onclick="location.href='/scan'">Scan</a></li>
                 <li><a href="#" onclick="location.href='/product'">Recommendation</a></li>
             </ol>
@@ -102,6 +106,90 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="/static/js/script.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const submitBtn = document.getElementById('submit-product-btn');
+    submitBtn.addEventListener('click', submitProductQuiz);
+
+    const closeBtn = document.getElementById('close-recommendation');
+    closeBtn.addEventListener('click', function() {
+        document.getElementById('product-recommendation').style.display = 'none';
+        resetQuizForm();
+    });
+});
+
+function validateForm() {
+    const radioGroups = document.querySelectorAll('input[type="radio"]:checked');
+    return radioGroups.length === 18; // Assuming there are 18 questions
+}
+
+function submitProductQuiz(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+    const allQuestionsAnswered = validateForm();
+    if (!allQuestionsAnswered) {
+        alert('Please answer all questions before submitting.');
+        return;
+    }
+    fetch('/submit_quiz', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(getProductFormData())
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.error) {
+            console.error('Error:', data.error);
+        } else {
+            displayProductRecommendations(data);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function getProductFormData() {
+    const form = document.getElementById('quiz-form');
+    const formData = new FormData(form);
+    const jsonData = {};
+    formData.forEach((value, key) => {
+        jsonData[key] = value === 'Yes' ? 1 : 0;
+    });
+    return jsonData;
+}
+
+function displayProductRecommendations(data) {
+    const recommendationsContainer = document.getElementById('recommendations');
+    recommendationsContainer.innerHTML = ''; // Clear previous recommendations
+    data.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `
+            <h3>${item.brand} - ${item.name}</h3>
+            <p>Price: ${item.price}</p>
+            <p>Skin Type: ${item['skin type']}</p>
+            <p>Concern: ${item.concern}</p>
+            <img src="${item.image_url}" alt="${item.name}" />
+        `;
+        recommendationsContainer.appendChild(card);
+    });
+    document.getElementById('product-recommendation').style.display = 'block'; // Show the recommendations section
+}
+
+function resetQuizForm() {
+    const form = document.getElementById('quiz-form');
+    const radioInputs = form.querySelectorAll('input[type="radio"]');
+    radioInputs.forEach(input => {
+        input.checked = false;
+    });
+}
+
         // JavaScript to hide the video when the product section is displayed
         document.addEventListener('DOMContentLoaded', function() {
             var productSection = document.getElementById('product');
@@ -120,6 +208,17 @@
 
             observer.observe(productSection);
         });
+        document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.querySelector('.hamburger-menu');
+        const navMenu = document.querySelector('.links');
+
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+    });
+
+
+
     </script>
 </body>
 </html>

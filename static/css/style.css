@@ -216,6 +216,10 @@ main ol.links a.active::after, main ol.links a:hover::after {
 .product-section .button:hover {
   background-color: #034d4d; /* Adjust the background color on hover as needed */
 }
+
+
+
+
 /* d */
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Tilt+Neon&display=swap");
 
@@ -374,48 +378,6 @@ img {
   100% {
     opacity: 1;
     transform: scale(1);
-  }
-}
-
-.hamburger-menu {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 25px;
-  width: 30px;
-}
-
-.bar {
-  height: 50px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 10px;
-}
-
-.links {
-  display: none;
-}
-
-.navigation.active {
-  display: block;
-}
-
-@media (min-width: 768px) {
-  .hamburger-menu {
-      display: none;
-  }
-
-  .links {
-      display: block;
-  }
-
-  .navigation {
-      display: flex;
-  }
-
-  .navigation li {
-      margin-right: 100px;
   }
 }
 
@@ -683,3 +645,45 @@ footer a {
     color: #00F0FF;
 }
 
+
+.hamburger-menu {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 25px;
+  width: 30px;
+}
+
+.bar {
+  height: 50px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.links {
+  display: none;
+}
+
+.navigation.active {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .hamburger-menu {
+      display: none;
+  }
+
+  .links {
+      display: block;
+  }
+
+  .navigation {
+      display: flex;
+  }
+
+  .navigation li {
+      margin-right: 100px;
+  }
+}

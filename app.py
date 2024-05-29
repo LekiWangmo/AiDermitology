@@ -2,7 +2,7 @@ from flask import Flask, logging, request, jsonify, render_template
 import numpy as np
 import pandas as pd
 import cv2
-from img2vec_pytorch import Img2Vec # type: ignore
+from img2vec_pytorch import Img2Vec
 import pickle
 from flask_cors import CORS
 from PIL import Image
@@ -20,7 +20,7 @@ with open("svm_model2.pkl", "rb") as f:
 
 img2vec = Img2Vec(model='resnet-18')
 
-acne_classes = ['Acne', 'Blackheads', 'Eyebags', 'Pimple', 'Fairskin', 'unrecognized']
+acne_classes = ['Acne', 'Blackheads', 'Eyebags', 'Pimple', 'Fairskin', 'unrecornized']
 
 @app.route('/')
 def index():
@@ -76,44 +76,60 @@ def classify_camera():
         return render_template('scan.html', error="No file selected.")
             
 
+
 # Load the model and data for recommendation
 model = tf.keras.models.load_model('skincare_model.h5')
 df = pd.read_csv('result.csv')
 
-with open('one_hot_encodings.pkl', 'rb') as f:
+
+with open('model.pkl', 'rb') as f:
     one_hot_encodings = pickle.load(f)
 
-features = ['normal', 'dry', 'oily', 'combination', 'acne', 'sensitive', 'fine_lines',
-            'wrinkles', 'dull', 'pore', 'blackheads',
-            'whiteheads', 'dark_circles', 'eye_bags', 'dark_spots']
+features = ['normal', 'dry', 'oily', 'combination', 'acne', 'sensitive',
+            'wrinkles', 'dull','blackheads',
+             'dark_circles', 'eye_bags', 'dark_spots']
+import random
 
 @app.route('/submit_quiz', methods=['POST'])
 def submit_quiz():
     try:
-        app.logger.debug('Received quiz submission.')
         user_responses = request.json
-        app.logger.debug(f'user_responses: {user_responses}')
-        
         user_vector = np.array([int(user_responses.get(feature, 0)) for feature in features])
-        app.logger.debug(f'user_vector: {user_vector}')
-
-        # Predict cosine similarity scores for all products
-        cs_values = cosine_similarity(user_vector.reshape(1, -1), one_hot_encodings)
-        app.logger.debug(f'cs_values: {cs_values}')
         
-        df['cs'] = cs_values[0]
-
-        recommendations = df.sort_values('cs', ascending=False).head(10) 
+        # Convert user_vector to a Tensor
+        user_tensor = tf.convert_to_tensor(user_vector.reshape(1, -1), dtype=tf.float32)
         
-        recommended_products = recommendations[['brand', 'name', 'price', 'skin type', 'concern', 'image_url']].to_dict(orient='records')
+        # Compute cosine similarity scores
+        cs_values = tf.keras.losses.cosine_similarity(user_tensor, one_hot_encodings)
+        df['cs'] = cs_values.numpy()[0]
+        recommendations = df.sort_values('cs', ascending=False)
         
-        return jsonify(recommended_products)
+        # Randomly select 5 products from recommendations
+        recommended_products = recommendations.sample(n=5)
+        
+        # Prepare recommendations to send back to the client
+        recommended_products_data = recommended_products[['brand', 'name', 'price', 'skin type', 'concern', 'image_url']].to_dict(orient='records')
+        
+        return jsonify(recommended_products_data)
     except Exception as e:
-        app.logger.error(f'An error occurred: {e}', exc_info=True)
+        app.logger.error(f'An error occurred: {e}')  # Log the error
         return jsonify({'error': 'An error occurred while processing your request.'}), 500
 
 
+@app.route('/index')
+def home_page():
+    return render_template('index.html')
 
+@app.route('/scan')
+def scan():
+    return render_template('scan.html')
+
+@app.route('/product')
+def product():
+    return render_template('product.html')
+
+if __name__ == '__main__':
+    app.run()
 
 @app.route('/index')
 def home_page():

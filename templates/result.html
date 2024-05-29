@@ -25,6 +25,30 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px
         }
+        /* .result-container h1 {
+            text-align: center;
+        }
+        .result-container img {
+            display: block;
+            margin: 20px auto;
+        }
+        .result-container p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        .result-container button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #008080;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .result-container button:hover {
+            background-color: #006666;
+        } */
     </style>
 </head>
 <body>
@@ -35,18 +59,19 @@
                     <img src="/static/images/logo.png" alt="Logo">
                 </a>
             </header>
+
             <canvas id="demo-canvas"></canvas>
-            <div class="content" >
-                <!-- <h1 class="main-title">Get Your <span class="thin">Result</span></h1 style="padding-left:45%, padding-bottom:20px"> -->
-                <!-- <p class="collection">
+            <div class="content">
+                <h1 class="main-title">Capture Your <span class="thin">Face</span></h1>
+                <p class="collection">
                     Experience effortless skincare analysis with AI Dermatology.<br> 
                     Upload a photo or click with your device's camera for instant skin assessment and<br>
                     personalized recommendations. Clearer skin is just a click away!
-                </p> -->
-                <div class="camera-card" style="margin-bottom: 10px; margin: auto; position: relative;  border-radius: 10px;margin-top: 80px;width: 800px; height: fit-content;">
-                    <div class="result-container" style="padding-bottom: 20px; width:700px;   border-radius: 10px;">
+                </p>
+                <div class="camera-card" style="margin-bottom: 20px; margin: auto;position: relative;">
+                    <div class="result-container" style="padding-bottom: 30px;">
                         <h1>Prediction Result</h1>
-                        <img src="data:image/png;base64,{{ image_data }}" alt="Uploaded Image" style="width:500px;   border-radius: 10px;">
+                        <img src="data:image/png;base64,{{ image_data }}" alt="Uploaded Image">
                         <p>Predicted Class: <strong>{{ predicted_class_svm }}</strong></p>
                         
                         {% if predicted_class_svm == 'Acne' %}
@@ -91,15 +116,15 @@
                             <p>5. Stay hydrated</p>
                         {% endif %}
                         
-                        <button onclick="window.location.href='/scan'" >Go Back</button>
+                        <button onclick="window.location.href='/'" >Go Back</button>
                     </div>
                 </div>
-                <main>  
+                <main> 
                     <div class="hamburger-menu">
                         <div class="bar"></div>
                         <div class="bar"></div>
                         <div class="bar"></div>
-                    </div>     
+                    </div>      
                     <ol class="links">
                         <li><a href="#" class="active" onclick="location.href='/index'">Home</a></li>
                         <li><a href="#" onclick="location.href='/scan'">Scan</a></li>
